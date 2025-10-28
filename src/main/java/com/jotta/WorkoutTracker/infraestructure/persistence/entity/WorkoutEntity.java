@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 @Entity
 @Data
 @Table(name = "workout")
-public class Workout {
+public class WorkoutEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,5 +30,5 @@ public class Workout {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private User user;
+    private UserEntity user;
 }

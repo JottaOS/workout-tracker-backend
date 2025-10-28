@@ -1,16 +1,16 @@
 package com.jotta.WorkoutTracker.infraestructure.persistence.entity;
 
-import com.jotta.WorkoutTracker.infraestructure.persistence.entity.embedded.RoutineExerciseId;
+import com.jotta.WorkoutTracker.infraestructure.persistence.entity.embedded.WorkoutExerciseId;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "routine_exercise")
+@Table(name = "workout_exercise")
 @Data
-public class RoutineExercise {
+public class WorkoutExerciseEntity {
 
     @EmbeddedId
-    private RoutineExerciseId id;
+    private WorkoutExerciseId id;
 
     @Column(name = "rest_seconds")
     private Integer restSeconds;
@@ -19,12 +19,12 @@ public class RoutineExercise {
     private String notes;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("routineId")
-    @JoinColumn(name = "routine_id", insertable = false, updatable = false)
-    private Routine routine;
+    @MapsId("workoutId")
+    @JoinColumn(name = "workout_id", insertable = false, updatable = false)
+    private WorkoutEntity workout;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("exerciseId")
     @JoinColumn(name = "exercise_id", insertable = false, updatable = false)
-    private Exercise exercise;
+    private ExerciseEntity exercise;
 }

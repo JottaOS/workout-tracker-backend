@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "workout_exercise_detail")
-public class WorkoutExerciseDetail {
+public class WorkoutExerciseDetailEntity {
 
     @EmbeddedId
     private WorkoutExerciseDetailId id;
@@ -31,10 +31,10 @@ public class WorkoutExerciseDetail {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("workoutId")
     @JoinColumn(name = "workout_id", insertable = false, updatable = false)
-    private Workout workout;
+    private WorkoutEntity workout;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("exerciseId")
     @JoinColumn(name = "exercise_id", insertable = false, updatable = false)
-    private Exercise exercise;
+    private ExerciseEntity exercise;
 }

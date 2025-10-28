@@ -10,7 +10,7 @@ import java.time.ZonedDateTime;
 @Entity
 @Table(name = "users") // Plural, PostgreSQL tiene palabra reservada "user"
 @Data
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;

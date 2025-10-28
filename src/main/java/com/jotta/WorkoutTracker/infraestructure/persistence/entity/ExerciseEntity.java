@@ -7,7 +7,7 @@ import lombok.Data;
 @Entity
 @Table(name = "exercise")
 @Data
-public class Exercise {
+public class ExerciseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
@@ -24,5 +24,5 @@ public class Exercise {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "muscle_id", nullable = false)
-    private Muscle muscle;
+    private MuscleEntity muscle;
 }

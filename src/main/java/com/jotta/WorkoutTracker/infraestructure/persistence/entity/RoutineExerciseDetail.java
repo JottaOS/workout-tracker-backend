@@ -31,10 +31,10 @@ public class RoutineExerciseDetail {
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("routineId")
     @JoinColumn(name = "routine_id", insertable = false, updatable = false)
-    private Routine routine;
+    private RoutineEntity routine;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("exerciseId")
     @JoinColumn(name = "exercise_id", insertable = false, updatable = false)
-    private Exercise exercise;
+    private ExerciseEntity exercise;
 }
