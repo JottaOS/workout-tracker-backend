@@ -1,6 +1,6 @@
 package com.jotta.WorkoutTracker.infraestructure.controller;
 
-import com.jotta.WorkoutTracker.domain.service.MuscleService;
+import com.jotta.WorkoutTracker.domain.port.in.MuscleService;
 import com.jotta.WorkoutTracker.infraestructure.controller.dto.AllMusclesDto;
 import com.jotta.WorkoutTracker.infraestructure.controller.dto.MuscleDto;
 import lombok.RequiredArgsConstructor;

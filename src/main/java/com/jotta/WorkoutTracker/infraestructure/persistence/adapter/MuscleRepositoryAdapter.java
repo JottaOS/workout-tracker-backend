@@ -1,7 +1,7 @@
 package com.jotta.WorkoutTracker.infraestructure.persistence.adapter;
 
 import com.jotta.WorkoutTracker.domain.model.Muscle;
-import com.jotta.WorkoutTracker.domain.repository.MuscleRepository;
+import com.jotta.WorkoutTracker.domain.port.out.MuscleRepository;
 import com.jotta.WorkoutTracker.infraestructure.persistence.repository.MuscleJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

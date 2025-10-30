@@ -1,4 +1,4 @@
-package com.jotta.WorkoutTracker.domain.service;
+package com.jotta.WorkoutTracker.domain.port.in;
 
 import com.jotta.WorkoutTracker.domain.model.Muscle;
 
