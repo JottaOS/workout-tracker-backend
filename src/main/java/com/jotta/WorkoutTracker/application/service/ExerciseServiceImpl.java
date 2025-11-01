@@ -1,6 +1,6 @@
 package com.jotta.WorkoutTracker.application.service;
 
-import com.jotta.WorkoutTracker.domain.exception.ApiError;
+import com.jotta.WorkoutTracker.domain.exception.DomainError;
 import com.jotta.WorkoutTracker.domain.exception.WorkoutTrackerException;
 import com.jotta.WorkoutTracker.domain.model.Exercise;
 import com.jotta.WorkoutTracker.domain.port.in.ExerciseService;
@@ -17,7 +17,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     public Exercise getById(Integer id) {
         return exerciseRepository.findById(id)
-                .orElseThrow(() -> new WorkoutTrackerException(ApiError.EXERCISE_NOT_FOUND));
+                .orElseThrow(() -> new WorkoutTrackerException(DomainError.EXERCISE_NOT_FOUND));
     }
 
     public List<Exercise> getAll() {

@@ -1,4 +1,4 @@
-package com.jotta.WorkoutTracker.domain.exception;
+package com.jotta.WorkoutTracker.infraestructure.controller.dto;
 
 import java.util.UUID;
 

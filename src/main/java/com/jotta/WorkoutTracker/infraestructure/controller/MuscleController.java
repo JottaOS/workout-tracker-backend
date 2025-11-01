@@ -1,6 +1,6 @@
 package com.jotta.WorkoutTracker.infraestructure.controller;
 
-import com.jotta.WorkoutTracker.domain.exception.ApiErrorResponse;
+import com.jotta.WorkoutTracker.infraestructure.controller.dto.ApiErrorResponse;
 import com.jotta.WorkoutTracker.infraestructure.controller.dto.AllMusclesDto;
 import com.jotta.WorkoutTracker.infraestructure.controller.dto.MuscleDto;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
