@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.UUID;
 
+// Cosas del framework en el dominio... fallé
+// Perdón
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
