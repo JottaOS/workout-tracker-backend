@@ -1,13 +1,18 @@
 package com.jotta.WorkoutTracker.infraestructure.persistence.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
 @Table(name = "workout")
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 public class WorkoutEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +31,18 @@ public class WorkoutEntity {
     private ZonedDateTime startedAt;
 
     @Column(name = "finished_at", nullable = false, updatable = false)
-    private ZonedDateTime finished_at;
+    private ZonedDateTime finishedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private UserEntity user;
+    @OneToMany(
+            mappedBy = "workout",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,  // Propagar insert update delete
+            orphanRemoval = true        // Eliminar de la BD cualquier registro que quite de mi lista
+    )
+    private List<WorkoutExerciseEntity> exercises = new ArrayList<>();
+
+    // TODO: agregar cuando se implemente el auth
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+//    private UserEntity user;
 }

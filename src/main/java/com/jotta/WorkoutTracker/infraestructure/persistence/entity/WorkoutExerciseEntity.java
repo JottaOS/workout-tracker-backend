@@ -4,6 +4,9 @@ import com.jotta.WorkoutTracker.infraestructure.persistence.entity.embedded.Work
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "workout_exercise")
 @Data
@@ -27,4 +30,12 @@ public class WorkoutExerciseEntity {
     @MapsId("exerciseId")
     @JoinColumn(name = "exercise_id", insertable = false, updatable = false)
     private ExerciseEntity exercise;
+
+    @OneToMany(
+            mappedBy = "workoutExercise",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<WorkoutExerciseDetailEntity> details = new ArrayList<>();
 }

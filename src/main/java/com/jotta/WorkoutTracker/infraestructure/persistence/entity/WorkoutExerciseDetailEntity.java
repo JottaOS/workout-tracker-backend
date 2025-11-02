@@ -29,12 +29,9 @@ public class WorkoutExerciseDetailEntity {
     private Integer durationSeconds;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("workoutId")
-    @JoinColumn(name = "workout_id", insertable = false, updatable = false)
-    private WorkoutEntity workout;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("exerciseId")
-    @JoinColumn(name = "exercise_id", insertable = false, updatable = false)
-    private ExerciseEntity exercise;
+    @JoinColumns({
+            @JoinColumn(name = "workout_id", referencedColumnName = "workout_id", insertable = false, updatable = false),
+            @JoinColumn(name = "exercise_id", referencedColumnName = "exercise_id", insertable = false, updatable = false)
+    })
+    private WorkoutExerciseEntity workoutExercise;
 }
