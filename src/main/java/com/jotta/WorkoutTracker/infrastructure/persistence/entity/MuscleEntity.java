@@ -1,0 +1,16 @@
+package com.jotta.WorkoutTracker.infrastructure.persistence.entity;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Entity
+@Data
+@Table(name = "muscle")
+public class MuscleEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer id;
+
+    @Column(nullable = false, length = 100)
+    private String name;
+}
