@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -39,7 +38,7 @@ public class WorkoutEntity {
             cascade = CascadeType.ALL,  // Propagar insert update delete
             orphanRemoval = true        // Eliminar de la BD cualquier registro que quite de mi lista
     )
-    private List<WorkoutExerciseEntity> exercises = new ArrayList<>();
+    private Set<WorkoutExerciseEntity> exercises;
 
     // TODO: agregar cuando se implemente el auth
 //    @ManyToOne(fetch = FetchType.LAZY)

@@ -4,13 +4,16 @@ import com.jotta.WorkoutTracker.infrastructure.persistence.entity.embedded.Worko
 import com.jotta.WorkoutTracker.shared.SetType;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
 @Table(name = "workout_exercise_detail")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class WorkoutExerciseDetailEntity {
 
     @EmbeddedId
+    @EqualsAndHashCode.Include
     private WorkoutExerciseDetailId id;
 
     @Enumerated(value = EnumType.STRING)

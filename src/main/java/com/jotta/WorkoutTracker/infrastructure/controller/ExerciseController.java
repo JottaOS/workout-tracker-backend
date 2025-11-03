@@ -24,8 +24,7 @@ public interface ExerciseController {
 
     @Operation(summary = "Get all exercises", description = "Gets all exercises without pagination")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Exercise obtained successfully", content = @Content(schema = @Schema(implementation = AllExercisesDto.class))),
-            @ApiResponse(responseCode = "404", description = "Exercise not found", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))),
+            @ApiResponse(responseCode = "200", description = "Exercises obtained successfully", content = @Content(schema = @Schema(implementation = AllExercisesDto.class))),
             @ApiResponse(responseCode = "500", description = "Internal error", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     })
     ResponseEntity<AllExercisesDto> getAll();

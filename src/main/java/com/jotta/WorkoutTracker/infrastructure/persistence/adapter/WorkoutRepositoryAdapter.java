@@ -22,7 +22,7 @@ public class WorkoutRepositoryAdapter implements WorkoutRepository {
     }
 
     public List<Workout> getAll() {
-        return workoutJpaRepository.findAllWithDetails().stream()
+        return workoutJpaRepository.findAll().stream()
                 .map(WorkoutMapper::toDomain)
                 .toList();
     }

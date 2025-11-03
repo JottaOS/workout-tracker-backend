@@ -3,16 +3,18 @@ package com.jotta.WorkoutTracker.infrastructure.persistence.entity;
 import com.jotta.WorkoutTracker.infrastructure.persistence.entity.embedded.WorkoutExerciseId;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "workout_exercise")
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class WorkoutExerciseEntity {
 
     @EmbeddedId
+    @EqualsAndHashCode.Include
     private WorkoutExerciseId id;
 
     @Column(name = "rest_seconds")
@@ -37,5 +39,5 @@ public class WorkoutExerciseEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<WorkoutExerciseDetailEntity> details = new ArrayList<>();
+    private Set<WorkoutExerciseDetailEntity> details;
 }

@@ -7,8 +7,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "workout_exercise_detail")
-public class RoutineExerciseDetail {
+@Table(name = "routine_exercise_detail")
+public class RoutineExerciseDetailEntity {
 
     @EmbeddedId
     private RoutineExerciseDetailId id;

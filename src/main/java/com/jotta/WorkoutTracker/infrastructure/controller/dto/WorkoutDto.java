@@ -21,6 +21,9 @@ public record WorkoutDto(
         @Min(0)
         Integer volume,
 
+        @Min(1)
+        Short sets,
+
         @NotNull
         ZonedDateTime startedAt,
 
@@ -28,6 +31,6 @@ public record WorkoutDto(
         ZonedDateTime finishedAt,
 
         @Valid
-        List<WorkoutExerciseDetailDto> details
+        List<WorkoutExerciseDto> exercises
 ) {
 }

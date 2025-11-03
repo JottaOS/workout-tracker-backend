@@ -27,8 +27,7 @@ public interface MuscleController {
 
     @Operation(summary = "Get all muscles", description = "Gets all muscles without pagination")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Muscle obtained successfully", content = @Content(schema = @Schema(implementation = AllMusclesDto.class))),
-            @ApiResponse(responseCode = "404", description = "Muscle not found", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))),
+            @ApiResponse(responseCode = "200", description = "Muscles obtained successfully", content = @Content(schema = @Schema(implementation = AllMusclesDto.class))),
             @ApiResponse(responseCode = "500", description = "Internal error", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     })
     ResponseEntity<AllMusclesDto> getAll();
