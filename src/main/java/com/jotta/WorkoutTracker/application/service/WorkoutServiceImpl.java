@@ -27,8 +27,8 @@ public class WorkoutServiceImpl implements WorkoutService {
                 .orElseThrow(() -> new WorkoutTrackerException(DomainError.WORKOUT_NOT_FOUND));
     }
 
-    public List<Workout> getAllWorkouts() {
-        return workoutRepository.getAll();
+    public List<Workout> getAllWorkouts(Boolean isTemplate) {
+        return workoutRepository.getAll(isTemplate);
     }
 
     public Workout createWorkout(Workout workout) {

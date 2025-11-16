@@ -18,6 +18,7 @@ public class WorkoutMapper {
                 .finishedAt(workoutDto.finishedAt())
                 .volume(workoutDto.volume())
                 .sets(workoutDto.sets())
+                .isTemplate(workoutDto.isTemplate())
                 .exercises(workoutDto.exercises()
                         .stream()
                         .map(exercise -> toDomain(exercise, workoutDto.id()))
@@ -57,6 +58,7 @@ public class WorkoutMapper {
                 .sets(workout.getSets())
                 .startedAt(workout.getStartedAt())
                 .finishedAt(workout.getFinishedAt())
+                .isTemplate(workout.getIsTemplate())
                 .exercises(workout.getExercises().stream().map(WorkoutMapper::toDto).toList())
                 .build();
     }

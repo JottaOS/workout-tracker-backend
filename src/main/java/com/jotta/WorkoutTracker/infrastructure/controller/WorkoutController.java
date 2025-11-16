@@ -20,12 +20,12 @@ public interface WorkoutController {
     })
     ResponseEntity<WorkoutDto> getById(Integer workoutId);
 
-    @Operation(summary = "Get all workouts", description = "Gets all workouts without pagination")
+    @Operation(summary = "Get all workouts", description = "Gets all workouts without pagination. If isTemplate is true, then returns all template workouts (routines). Otherwise workouts")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Workouts obtained successfully", content = @Content(schema = @Schema(implementation = AllWorkoutsDto.class))),
             @ApiResponse(responseCode = "500", description = "Internal error", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     })
-    ResponseEntity<AllWorkoutsDto> getAll();
+    ResponseEntity<AllWorkoutsDto> getAll(Boolean isTemplate);
 
 
     @Operation(summary = "Create a workout", description = "Creates a workout with exercises and set details")

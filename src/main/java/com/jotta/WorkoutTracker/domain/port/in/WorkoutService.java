@@ -7,7 +7,7 @@ import java.util.List;
 public interface WorkoutService {
     Workout getWorkout(Integer workoutId);
 
-    List<Workout> getAllWorkouts();
+    List<Workout> getAllWorkouts(Boolean isTemplate);
 
     Workout createWorkout(Workout workout);
 

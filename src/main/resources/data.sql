@@ -30,10 +30,10 @@ VALUES (1, 'Bench Press', 'https://example.com/images/bench_press.jpg', 1, 'WEIG
 -- ==========================
 -- WORKOUTS
 -- ==========================
-INSERT INTO workout (id, title, sets, volume, started_at, finished_at)
-VALUES (1, 'Chest Day', 12, 8500, '2025-10-31 18:00:00-03', '2025-10-31 19:15:00-03'),
-       (2, 'Legs and Core', 10, 10200, '2025-11-01 17:00:00-03', '2025-11-01 18:10:00-03'),
-       (3, 'Back & Biceps', 11, 9300, '2025-11-02 19:00:00-03', '2025-11-02 20:05:00-03');
+INSERT INTO workout (id, title, sets, volume, started_at, finished_at, is_template)
+VALUES (1, 'Chest Day', 12, 8500, '2025-10-31 18:00:00-03', '2025-10-31 19:15:00-03', false),
+       (2, 'Legs and Core', 10, 10200, '2025-11-01 17:00:00-03', '2025-11-01 18:10:00-03', false),
+       (3, 'Back & Biceps', 11, 9300, null, null, true);
 
 -- ==========================
 -- WORKOUT_EXERCISES

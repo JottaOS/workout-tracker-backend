@@ -26,11 +26,14 @@ public class WorkoutEntity {
     @Column
     private Integer volume;
 
-    @Column(name = "started_at", nullable = false, updatable = false)
+    @Column(name = "started_at")
     private ZonedDateTime startedAt;
 
-    @Column(name = "finished_at", nullable = false, updatable = false)
+    @Column(name = "finished_at")
     private ZonedDateTime finishedAt;
+
+    @Column(name = "is_template")
+    private Boolean isTemplate = false;
 
     @OneToMany(
             mappedBy = "workout",

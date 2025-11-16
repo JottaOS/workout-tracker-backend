@@ -25,11 +25,12 @@ public record WorkoutDto(
         @Min(1)
         Short sets,
 
-        @NotNull
         ZonedDateTime startedAt,
 
-        @NotNull
         ZonedDateTime finishedAt,
+
+        @NotNull(message = "isTemplate cannot be null")
+        Boolean isTemplate,
 
         @Valid
         List<WorkoutExerciseDto> exercises

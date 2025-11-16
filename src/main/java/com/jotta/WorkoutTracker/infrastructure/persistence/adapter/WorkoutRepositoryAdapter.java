@@ -21,8 +21,8 @@ public class WorkoutRepositoryAdapter implements WorkoutRepository {
                 .map(WorkoutMapper::toDomain);
     }
 
-    public List<Workout> getAll() {
-        return workoutJpaRepository.findAll().stream()
+    public List<Workout> getAll(Boolean isTemplate) {
+        return workoutJpaRepository.findAllByIsTemplate(isTemplate).stream()
                 .map(WorkoutMapper::toDomain)
                 .toList();
     }

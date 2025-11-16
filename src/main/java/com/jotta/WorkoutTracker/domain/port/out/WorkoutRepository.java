@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface WorkoutRepository {
     Optional<Workout> getById(Integer workoutId);
 
-    List<Workout> getAll();
+    List<Workout> getAll(Boolean isTemplate);
 
     Workout save(Workout workout);
 

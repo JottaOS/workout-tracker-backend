@@ -24,9 +24,9 @@ public class WorkoutControllerImpl implements WorkoutController {
     }
 
     @GetMapping
-    public ResponseEntity<AllWorkoutsDto> getAll() {
+    public ResponseEntity<AllWorkoutsDto> getAll(@RequestParam(defaultValue = "false") Boolean isTemplate) {
         return ResponseEntity.ok(new AllWorkoutsDto(
-                workoutService.getAllWorkouts()
+                workoutService.getAllWorkouts(isTemplate)
                         .stream()
                         .map(WorkoutMapper::toDto)
                         .toList()

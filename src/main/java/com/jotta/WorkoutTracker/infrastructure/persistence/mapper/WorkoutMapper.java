@@ -29,6 +29,7 @@ public class WorkoutMapper {
                 .volume(entity.getVolume())
                 .startedAt(entity.getStartedAt())
                 .finishedAt(entity.getFinishedAt())
+                .isTemplate(entity.getIsTemplate())
                 .exercises(exercises)
                 .build();
     }
@@ -72,6 +73,7 @@ public class WorkoutMapper {
                 .sets(workout.getSets())
                 .startedAt(workout.getStartedAt())
                 .finishedAt(workout.getFinishedAt())
+                .isTemplate(workout.getIsTemplate())
                 .build();
 
         final var exercises = workout.getExercises()
