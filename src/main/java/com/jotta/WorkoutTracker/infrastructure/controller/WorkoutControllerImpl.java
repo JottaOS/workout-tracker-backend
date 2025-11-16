@@ -4,12 +4,12 @@ import com.jotta.WorkoutTracker.domain.port.in.WorkoutService;
 import com.jotta.WorkoutTracker.infrastructure.controller.dto.AllWorkoutsDto;
 import com.jotta.WorkoutTracker.infrastructure.controller.dto.WorkoutDto;
 import com.jotta.WorkoutTracker.infrastructure.controller.mapper.WorkoutMapper;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -19,11 +19,11 @@ public class WorkoutControllerImpl implements WorkoutController {
     private final WorkoutService workoutService;
 
     @GetMapping("/{workoutId}")
-    public ResponseEntity<WorkoutDto> getById(Integer workoutId) {
+    public ResponseEntity<WorkoutDto> getById(@PathVariable Integer workoutId) {
         return ResponseEntity.ok(WorkoutMapper.toDto(workoutService.getWorkout(workoutId)));
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<AllWorkoutsDto> getAll() {
         return ResponseEntity.ok(new AllWorkoutsDto(
                 workoutService.getAllWorkouts()
@@ -32,4 +32,26 @@ public class WorkoutControllerImpl implements WorkoutController {
                         .toList()
         ));
     }
+
+    @PostMapping
+    public ResponseEntity<WorkoutDto> createWorkout(@Valid @RequestBody WorkoutDto workoutRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(WorkoutMapper.toDto(workoutService.createWorkout(WorkoutMapper.toDomain(workoutRequest))));
+    }
+
+    @PutMapping("/{workoutId}")
+    public ResponseEntity<WorkoutDto> updateWorkout(@PathVariable Integer workoutId,
+                                                    @Valid @RequestBody WorkoutDto workoutDto) {
+        return ResponseEntity.ok(
+                WorkoutMapper.toDto(workoutService.updateWorkout(workoutId, WorkoutMapper.toDomain(workoutDto)))
+        );
+    }
+
+    @DeleteMapping("/{workoutId}")
+    public ResponseEntity<Void> deleteWorkout(@PathVariable Integer workoutId) {
+        workoutService.deleteWorkout(workoutId);
+        return ResponseEntity.accepted().build();
+    }
+
+
 }

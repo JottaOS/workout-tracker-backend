@@ -31,4 +31,5 @@ public interface MuscleController {
             @ApiResponse(responseCode = "500", description = "Internal error", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     })
     ResponseEntity<AllMusclesDto> getAll();
+
 }

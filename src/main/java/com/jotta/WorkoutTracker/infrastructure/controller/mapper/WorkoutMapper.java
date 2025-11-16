@@ -7,7 +7,48 @@ import com.jotta.WorkoutTracker.infrastructure.controller.dto.WorkoutDto;
 import com.jotta.WorkoutTracker.infrastructure.controller.dto.WorkoutExerciseDetailDto;
 import com.jotta.WorkoutTracker.infrastructure.controller.dto.WorkoutExerciseDto;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class WorkoutMapper {
+    public static Workout toDomain(WorkoutDto workoutDto) {
+        return Workout.builder()
+                .id(workoutDto.id())
+                .title(workoutDto.title())
+                .startedAt(workoutDto.startedAt())
+                .finishedAt(workoutDto.finishedAt())
+                .volume(workoutDto.volume())
+                .sets(workoutDto.sets())
+                .exercises(workoutDto.exercises()
+                        .stream()
+                        .map(exercise -> toDomain(exercise, workoutDto.id()))
+                        .toList())
+                .build();
+    }
+
+    public static WorkoutExercise toDomain(WorkoutExerciseDto dto, Integer workoutId) {
+        AtomicInteger index = new AtomicInteger(1);
+
+        return WorkoutExercise.builder()
+                .workoutId(workoutId)
+                .exerciseId(dto.exerciseId())
+                .notes(dto.notes())
+                .restSeconds(dto.restSeconds())
+                .details(dto.details().stream().map((item) -> toDomain(item, (short) index.getAndIncrement())).toList())
+                .build();
+    }
+
+    public static WorkoutExerciseDetail toDomain(WorkoutExerciseDetailDto dto, Short index) {
+        return WorkoutExerciseDetail.builder()
+                .item(index)
+                .exercise(null) // settear en service
+                .type(dto.type())
+                .weight(dto.weight())
+                .distanceMeters(dto.distanceMeters())
+                .durationSeconds(dto.durationSeconds())
+                .reps(dto.reps())
+                .build();
+    }
+
     public static WorkoutDto toDto(Workout workout) {
         return WorkoutDto.builder()
                 .id(workout.getId())

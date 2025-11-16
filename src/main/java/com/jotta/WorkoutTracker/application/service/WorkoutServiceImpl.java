@@ -36,10 +36,11 @@ public class WorkoutServiceImpl implements WorkoutService {
         return workoutRepository.save(workout);
     }
 
-    public Workout updateWorkout(Workout workout) {
-        getWorkout(workout.getId());
+    public Workout updateWorkout(Integer workoutId, Workout workout) {
+        final var savedWorkout = getWorkout(workoutId);
+        workout.setId(savedWorkout.getId());
         validateWorkout(workout);
-        return workoutRepository.update(workout);
+        return workoutRepository.save(workout);
     }
 
     public void deleteWorkout(Integer workoutId) {

@@ -3,13 +3,15 @@ package com.jotta.WorkoutTracker.infrastructure.persistence.entity;
 import com.jotta.WorkoutTracker.infrastructure.persistence.entity.embedded.WorkoutExerciseDetailId;
 import com.jotta.WorkoutTracker.shared.SetType;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 @Data
 @Entity
 @Table(name = "workout_exercise_detail")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class WorkoutExerciseDetailEntity {
 
     @EmbeddedId

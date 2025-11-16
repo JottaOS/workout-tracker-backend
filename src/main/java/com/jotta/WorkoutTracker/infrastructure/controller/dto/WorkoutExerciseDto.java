@@ -8,7 +8,7 @@ import java.util.List;
 
 @Builder
 public record WorkoutExerciseDto(
-        @Min(1)
+        @Min(value = 1)
         Integer exerciseId,
         Integer restSeconds,
         String notes,

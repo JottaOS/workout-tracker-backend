@@ -22,7 +22,7 @@ public class Workout {
     private List<WorkoutExercise> exercises;
 
     public void validateTimePeriod() {
-        if (finishedAt.isBefore(startedAt) || ZonedDateTime.now().isBefore(startedAt)) {
+        if (finishedAt.isBefore(startedAt) || finishedAt.isEqual(startedAt) || ZonedDateTime.now().isBefore(startedAt)) {
             throw new WorkoutTrackerException(DomainError.INVALID_WORKOUT_TIME_PERIOD);
         }
     }

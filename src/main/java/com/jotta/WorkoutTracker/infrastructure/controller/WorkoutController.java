@@ -26,4 +26,31 @@ public interface WorkoutController {
             @ApiResponse(responseCode = "500", description = "Internal error", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     })
     ResponseEntity<AllWorkoutsDto> getAll();
+
+
+    @Operation(summary = "Create a workout", description = "Creates a workout with exercises and set details")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Workout created successfully", content = @Content(schema = @Schema(implementation = WorkoutDto.class))),
+            @ApiResponse(responseCode = "404", description = "An entity has not been found", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Internal error", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
+    })
+    ResponseEntity<WorkoutDto> createWorkout(WorkoutDto workoutRequest);
+
+
+    @Operation(summary = "Update a workout", description = "Updates a workout with exercises and set details")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Workout updated successfully", content = @Content(schema = @Schema(implementation = WorkoutDto.class))),
+            @ApiResponse(responseCode = "404", description = "An entity has not been found", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Internal error", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
+    })
+    ResponseEntity<WorkoutDto> updateWorkout(Integer workoutId, WorkoutDto workoutDto);
+
+    @Operation(summary = "Delete a workout", description = "Delete a workout by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202", description = "Workout deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Workout not found", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Internal error", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
+    })
+    ResponseEntity<Void> deleteWorkout(Integer workoutId);
+
 }

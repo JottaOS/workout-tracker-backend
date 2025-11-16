@@ -12,8 +12,6 @@ public interface WorkoutRepository {
 
     Workout save(Workout workout);
 
-    Workout update(Workout workout);
-
     void deleteById(Integer workoutId);
 
 }

@@ -2,15 +2,18 @@ package com.jotta.WorkoutTracker.infrastructure.persistence.entity;
 
 import com.jotta.WorkoutTracker.infrastructure.persistence.entity.embedded.WorkoutExerciseId;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "workout_exercise")
-@Data
+@Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class WorkoutExerciseEntity {
 
     @EmbeddedId
@@ -29,7 +32,7 @@ public class WorkoutExerciseEntity {
     private WorkoutEntity workout;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("exerciseId")
+//    @MapsId("exerciseId")
     @JoinColumn(name = "exercise_id", insertable = false, updatable = false)
     private ExerciseEntity exercise;
 

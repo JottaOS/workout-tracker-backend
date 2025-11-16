@@ -16,11 +16,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Embeddable
 public class WorkoutExerciseDetailId implements Serializable {
-    @Column(name = "workout_id")
-    private Integer workoutId;
-
-    @Column(name = "exercise_id")
-    private Integer exerciseId;
+    private WorkoutExerciseId workoutExerciseId;
 
     @Column
     private Short item;

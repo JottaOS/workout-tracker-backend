@@ -29,18 +29,12 @@ public class WorkoutRepositoryAdapter implements WorkoutRepository {
 
     @Transactional
     public Workout save(Workout workout) {
-        return WorkoutMapper.toDomain(
-                workoutJpaRepository.save(WorkoutMapper.toEntity(workout))
-        );
+        final var entity = workoutJpaRepository.save(WorkoutMapper.toEntity(workout));
+        workout.setId(entity.getId());
+        return workout;
     }
 
     @Transactional
-    public Workout update(Workout workout) {
-        return WorkoutMapper.toDomain(
-                workoutJpaRepository.save(WorkoutMapper.toEntity(workout))
-        );
-    }
-
     public void deleteById(Integer workoutId) {
         workoutJpaRepository.deleteById(workoutId);
     }

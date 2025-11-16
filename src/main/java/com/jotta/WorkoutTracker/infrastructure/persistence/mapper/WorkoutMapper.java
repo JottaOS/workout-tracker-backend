@@ -8,8 +8,12 @@ import com.jotta.WorkoutTracker.infrastructure.persistence.entity.ExerciseEntity
 import com.jotta.WorkoutTracker.infrastructure.persistence.entity.WorkoutEntity;
 import com.jotta.WorkoutTracker.infrastructure.persistence.entity.WorkoutExerciseDetailEntity;
 import com.jotta.WorkoutTracker.infrastructure.persistence.entity.WorkoutExerciseEntity;
+import com.jotta.WorkoutTracker.infrastructure.persistence.entity.embedded.WorkoutExerciseDetailId;
+import com.jotta.WorkoutTracker.infrastructure.persistence.entity.embedded.WorkoutExerciseId;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class WorkoutMapper {
 
@@ -28,18 +32,6 @@ public class WorkoutMapper {
                 .exercises(exercises)
                 .build();
     }
-
-    public static WorkoutEntity toEntity(Workout workout) {
-        return WorkoutEntity.builder()
-                .id(workout.getId())
-                .title(workout.getTitle())
-                .volume(workout.getVolume())
-                .sets(workout.getSets())
-                .startedAt(workout.getStartedAt())
-                .finishedAt(workout.getFinishedAt())
-                .build();
-    }
-
 
     private static WorkoutExercise toDomain(WorkoutExerciseEntity entity) {
         List<WorkoutExerciseDetail> details = entity.getDetails().stream()
@@ -72,4 +64,64 @@ public class WorkoutMapper {
                 .build();
     }
 
+    public static WorkoutEntity toEntity(Workout workout) {
+        final var workoutEntity = WorkoutEntity.builder()
+                .id(workout.getId())
+                .title(workout.getTitle())
+                .volume(workout.getVolume())
+                .sets(workout.getSets())
+                .startedAt(workout.getStartedAt())
+                .finishedAt(workout.getFinishedAt())
+                .build();
+
+        final var exercises = workout.getExercises()
+                .stream()
+                .map(item -> toEntity(item, workoutEntity))
+                .collect(Collectors.toSet());
+
+        workoutEntity.setExercises(exercises);
+        return workoutEntity;
+    }
+
+    private static WorkoutExerciseEntity toEntity(WorkoutExercise exercise,
+                                                  WorkoutEntity workoutEntity) {
+
+        final var workoutExerciseEntity = WorkoutExerciseEntity.builder()
+                .id(new WorkoutExerciseId(exercise.getWorkoutId(), exercise.getExerciseId()))
+                .restSeconds(exercise.getRestSeconds())
+                .notes(exercise.getNotes())
+                .workout(workoutEntity)
+                .build();
+
+        AtomicInteger index = new AtomicInteger(1);
+        final var details = exercise.getDetails()
+                .stream()
+                .map(item -> {
+                    final var detailId = new WorkoutExerciseDetailId(
+                            workoutExerciseEntity.getId(),
+                            (short) index.getAndIncrement()
+                    );
+                    return toEntity(item, detailId, workoutExerciseEntity);
+                })
+                .collect(Collectors.toSet());
+
+        workoutExerciseEntity.setDetails(details);
+        return workoutExerciseEntity;
+    }
+
+    private static WorkoutExerciseDetailEntity toEntity(
+            WorkoutExerciseDetail detail,
+            WorkoutExerciseDetailId id,
+            WorkoutExerciseEntity workoutExercise
+    ) {
+        return WorkoutExerciseDetailEntity.builder()
+                .id(id)
+                .type(detail.getType())
+                .reps(detail.getReps())
+                .weight(detail.getWeight())
+                .distanceMeters(detail.getDistanceMeters())
+                .durationSeconds(detail.getDurationSeconds())
+                .workoutExercise(workoutExercise)
+                .build();
+    }
 }
