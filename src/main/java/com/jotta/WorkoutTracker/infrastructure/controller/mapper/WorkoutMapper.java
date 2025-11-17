@@ -3,14 +3,28 @@ package com.jotta.WorkoutTracker.infrastructure.controller.mapper;
 import com.jotta.WorkoutTracker.domain.model.Workout;
 import com.jotta.WorkoutTracker.domain.model.WorkoutExercise;
 import com.jotta.WorkoutTracker.domain.model.WorkoutExerciseDetail;
-import com.jotta.WorkoutTracker.infrastructure.controller.dto.WorkoutDto;
+import com.jotta.WorkoutTracker.infrastructure.controller.dto.WorkoutRequestDto;
+import com.jotta.WorkoutTracker.infrastructure.controller.dto.WorkoutResponseDto;
 import com.jotta.WorkoutTracker.infrastructure.controller.dto.WorkoutExerciseDetailDto;
 import com.jotta.WorkoutTracker.infrastructure.controller.dto.WorkoutExerciseDto;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class WorkoutMapper {
-    public static Workout toDomain(WorkoutDto workoutDto) {
+    public static Workout toDomain(WorkoutRequestDto workoutDto) {
+        return Workout.builder()
+                .title(workoutDto.title())
+                .startedAt(workoutDto.startedAt())
+                .finishedAt(workoutDto.finishedAt())
+                .isTemplate(workoutDto.isTemplate())
+                .exercises(workoutDto.exercises()
+                        .stream()
+                        .map(exercise -> toDomain(exercise, null))
+                        .toList())
+                .build();
+    }
+
+    public static Workout toDomain(WorkoutResponseDto workoutDto) {
         return Workout.builder()
                 .id(workoutDto.id())
                 .title(workoutDto.title())
@@ -50,8 +64,8 @@ public class WorkoutMapper {
                 .build();
     }
 
-    public static WorkoutDto toDto(Workout workout) {
-        return WorkoutDto.builder()
+    public static WorkoutResponseDto toDto(Workout workout) {
+        return WorkoutResponseDto.builder()
                 .id(workout.getId())
                 .title(workout.getTitle())
                 .volume(workout.getVolume())

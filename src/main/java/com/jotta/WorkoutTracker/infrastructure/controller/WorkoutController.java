@@ -14,11 +14,11 @@ import org.springframework.http.ResponseEntity;
 public interface WorkoutController {
     @Operation(summary = "Get workout by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Workout obtained successfully", content = @Content(schema = @Schema(implementation = WorkoutDto.class))),
+            @ApiResponse(responseCode = "200", description = "Workout obtained successfully", content = @Content(schema = @Schema(implementation = WorkoutResponseDto.class))),
             @ApiResponse(responseCode = "404", description = "Workout not found", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))),
             @ApiResponse(responseCode = "500", description = "Internal error", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     })
-    ResponseEntity<WorkoutDto> getById(Integer workoutId);
+    ResponseEntity<WorkoutResponseDto> getById(Integer workoutId);
 
     @Operation(summary = "Get all workouts", description = "Gets all workouts without pagination. If isTemplate is true, then returns all template workouts (routines). Otherwise workouts")
     @ApiResponses(value = {
@@ -30,20 +30,20 @@ public interface WorkoutController {
 
     @Operation(summary = "Create a workout", description = "Creates a workout with exercises and set details")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Workout created successfully", content = @Content(schema = @Schema(implementation = WorkoutDto.class))),
+            @ApiResponse(responseCode = "201", description = "Workout created successfully", content = @Content(schema = @Schema(implementation = WorkoutResponseDto.class))),
             @ApiResponse(responseCode = "404", description = "An entity has not been found", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))),
             @ApiResponse(responseCode = "500", description = "Internal error", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     })
-    ResponseEntity<WorkoutDto> createWorkout(WorkoutDto workoutRequest);
+    ResponseEntity<WorkoutResponseDto> createWorkout(WorkoutRequestDto workoutRequest);
 
 
     @Operation(summary = "Update a workout", description = "Updates a workout with exercises and set details")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Workout updated successfully", content = @Content(schema = @Schema(implementation = WorkoutDto.class))),
+            @ApiResponse(responseCode = "201", description = "Workout updated successfully", content = @Content(schema = @Schema(implementation = WorkoutResponseDto.class))),
             @ApiResponse(responseCode = "404", description = "An entity has not been found", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class))),
             @ApiResponse(responseCode = "500", description = "Internal error", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     })
-    ResponseEntity<WorkoutDto> updateWorkout(Integer workoutId, WorkoutDto workoutDto);
+    ResponseEntity<WorkoutResponseDto> updateWorkout(Integer workoutId, WorkoutRequestDto workoutDto);
 
     @Operation(summary = "Delete a workout", description = "Delete a workout by id")
     @ApiResponses(value = {

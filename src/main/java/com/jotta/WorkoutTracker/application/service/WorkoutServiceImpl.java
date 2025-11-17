@@ -51,11 +51,15 @@ public class WorkoutServiceImpl implements WorkoutService {
 
     private void validateWorkout(Workout workout) {
         workout.validateTimePeriod();
+
         if (workout.getExercises().isEmpty()) {
             throw new WorkoutTrackerException(DomainError.EMPTY_WORKOUT_EXERCISES);
         }
 
         workout.checkRepeatedExercises();
+
+        workout.calculateTotalSets();
+        workout.calculateTotalVolume();
         workout.getExercises().forEach(exercise -> {
                     final Exercise workoutExercise = exerciseService.getById(exercise.getExerciseId());
                     exercise.getDetails().forEach(detail -> {

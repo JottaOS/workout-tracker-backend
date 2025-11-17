@@ -2,7 +2,8 @@ package com.jotta.WorkoutTracker.infrastructure.controller;
 
 import com.jotta.WorkoutTracker.domain.port.in.WorkoutService;
 import com.jotta.WorkoutTracker.infrastructure.controller.dto.AllWorkoutsDto;
-import com.jotta.WorkoutTracker.infrastructure.controller.dto.WorkoutDto;
+import com.jotta.WorkoutTracker.infrastructure.controller.dto.WorkoutRequestDto;
+import com.jotta.WorkoutTracker.infrastructure.controller.dto.WorkoutResponseDto;
 import com.jotta.WorkoutTracker.infrastructure.controller.mapper.WorkoutMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class WorkoutControllerImpl implements WorkoutController {
     private final WorkoutService workoutService;
 
     @GetMapping("/{workoutId}")
-    public ResponseEntity<WorkoutDto> getById(@PathVariable Integer workoutId) {
+    public ResponseEntity<WorkoutResponseDto> getById(@PathVariable Integer workoutId) {
         return ResponseEntity.ok(WorkoutMapper.toDto(workoutService.getWorkout(workoutId)));
     }
 
@@ -34,14 +35,14 @@ public class WorkoutControllerImpl implements WorkoutController {
     }
 
     @PostMapping
-    public ResponseEntity<WorkoutDto> createWorkout(@Valid @RequestBody WorkoutDto workoutRequest) {
+    public ResponseEntity<WorkoutResponseDto> createWorkout(@Valid @RequestBody WorkoutRequestDto workoutRequest) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(WorkoutMapper.toDto(workoutService.createWorkout(WorkoutMapper.toDomain(workoutRequest))));
     }
 
     @PutMapping("/{workoutId}")
-    public ResponseEntity<WorkoutDto> updateWorkout(@PathVariable Integer workoutId,
-                                                    @Valid @RequestBody WorkoutDto workoutDto) {
+    public ResponseEntity<WorkoutResponseDto> updateWorkout(@PathVariable Integer workoutId,
+                                                            @Valid @RequestBody WorkoutRequestDto workoutDto) {
         return ResponseEntity.ok(
                 WorkoutMapper.toDto(workoutService.updateWorkout(workoutId, WorkoutMapper.toDomain(workoutDto)))
         );

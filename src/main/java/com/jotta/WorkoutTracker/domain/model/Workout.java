@@ -6,9 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.ZonedDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Builder
@@ -42,13 +40,26 @@ public class Workout {
     }
 
     public void checkRepeatedExercises() {
-        Set<Integer> exerciseIds = new HashSet<>(exercises.stream()
+        long uniqueCount = exercises.stream()
                 .map(WorkoutExercise::getExerciseId)
-                .toList()
-        );
+                .distinct()
+                .count();
 
-        if (exerciseIds.size() != exercises.size()) {
+        if (uniqueCount != exercises.size()) {
             throw new WorkoutTrackerException(DomainError.REPEATING_WORKOUT_EXERCISES);
         }
+    }
+
+    public void calculateTotalVolume() {
+        volume = exercises.stream()
+                .flatMap(exercise -> exercise.getDetails().stream())
+                .mapToInt(detail -> detail.getReps() * detail.getWeight())
+                .sum();
+    }
+
+    public void calculateTotalSets() {
+        sets = (short) exercises.stream()
+                .mapToInt(exercise -> exercise.getDetails().size())
+                .sum();
     }
 }
